@@ -1,0 +1,180 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Putatu.com</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding id="homePage">
+
+  <div class="navbar">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <img src="../../assets/images/logo.png" class="logo"/>
+        </ion-col>
+
+        <ion-col col-6>
+          <button ion-button color="primary" (click)="colex()" style="float:right;">
+            <ion-icon name="apps"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+      <div id="extra" class="extra-menu" [hidden]="collapsed">
+        <ion-row>
+          <ion-col col-12>
+            <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <a href="#" (click)="changePage('info')">
+            <ion-col col-1>
+              <i class="fa fa-info-circle"></i>
+            </ion-col>
+            <ion-col col-11>Help</ion-col>
+          </a>
+        </ion-row>
+        <ion-row>
+          <a href="#" (click)="changePage('login')">
+            <ion-col col-1>
+              <i class="fa fa-sign-in"></i>
+            </ion-col>
+            <ion-col col-11>Login</ion-col>
+          </a>
+        </ion-row>
+        <ion-row>
+          <a href="#" (click)="changePage('register')">
+            <ion-col col-1>
+              <i class="fa fa-user-plus"></i>
+            </ion-col>
+            <ion-col col-11>Register</ion-col>
+          </a>
+        </ion-row>
+      </div>
+    </ion-grid>
+
+  </div>
+  <div style="display: flex;">
+    <div col-2>
+      <button ion-button color="primary" menuToggle id="toggleMenu">
+        <ion-icon name="code"></ion-icon>
+      </button>
+    </div>
+    <div col-10 class="float-right;">
+      <button id="btnReference" class="reference float-right"></button>
+    </div>
+  </div>
+
+  <div class="containers">
+    <ion-grid class="store-feature">
+      <ion-row>
+        <ion-col *ngFor="let store of stores" class="hasBorder item" col-6 col-sm-4 col-md-3 col-lg-2>
+          <div class="storeDiv">
+            <div class="align-center">
+              <img src="{{store.image}}" height="50px"/>
+            </div>
+            <div>
+              <div class="align-center">
+                {{store.content}}
+              </div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col col-12>
+          <div class="align-center">
+            <a href="#" class="loadMore">Load more store</a>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid class="hot-trends" style="border: 1px dotted #e1e1e1">
+      <ion-row>
+        <ion-col col-12 id="headerTrends">
+          <div class="header" style="padding: 1em 10px;">
+            Hot Trends
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col col-12>
+          <ion-slides [options]="mySlideOptions" pager>
+            <ion-slide *ngFor="let product of hot_trends">
+              <div style="padding-bottom: 2em;">
+                <div>
+                  <img [src]="product.image"></div>
+                <div class="hot-trends-content">
+                  <p>{{product.description}}</p>
+                  <div style="display: flex;">
+                    <div col-6>
+                      <img src="https://putatu.com/storage/store_logo/b349b355585b81a035176c1365b84c47.png"
+                           class="store_logo">
+                    </div>
+                    <div col-6>
+                      <div class="oldPrice price">{{product.oldPrice | currency:'VND':true:'1.0-0'}}</div>
+                      <div class="newPrice price">{{product.newPrice | currency:'VND':true:'1.0-0'}}</div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <button class="get-deal">{{product.cashBackRate | percent:'1.0-2'}}</button>
+                </div>
+              </div>
+            </ion-slide>
+          </ion-slides>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div class="topDeal" style="padding: 1em 0;">
+      <div class="title">
+        top deal
+      </div>
+      <div *ngFor="let product of top_deals" style="border: 1px dotted #e1e1e1; margin:1em 0;">
+        <div>
+          <img src="{{product.image}}"/>
+        </div>
+        <div col-6>
+          <img src="https://putatu.com/storage/store_logo/b349b355585b81a035176c1365b84c47.png"
+               class="store_logo">
+        </div>
+        <div style="min-height: 3em; padding-left: 3px;">{{product.description}}</div>
+        <div style="height: 62px;">
+          <div class="oldPrice">{{product.oldPrice | currency:'VND':'1.2-2'}}</div>
+          <div class="newPrice">{{product.newPrice | currency:'VND':'1.2-2'}}</div>
+        </div>
+        <div>
+          <button class="get-top-deal">{{product.cashBackRate | percent:'1.0-2'}}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <page-footer></page-footer>
+
+  <ion-fab right bottom>
+    <button ion-fab color="#28c4ea">
+      <ion-icon name="arrow-dropleft"></ion-icon>
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab color="#3b5998">
+        <ion-icon name="logo-facebook"></ion-icon>
+      </button>
+      <button ion-fab color="#1da1f2">
+        <ion-icon name="logo-twitter"></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="logo-vimeo"></ion-icon>
+      </button>
+      <button ion-fab>
+        <ion-icon name="logo-googleplus"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
+</ion-content>
